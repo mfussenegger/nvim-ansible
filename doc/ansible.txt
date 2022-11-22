@@ -1,0 +1,12 @@
+================================================================================
+                                                                       *ansible*
+
+M.run()                                                            *ansible.run*
+     Run the current file using `ansible-playbook` or `ansible localhost -m import_role`
+     Which one is used depends on if the current file is in a /roles/ or in a /playbooks folder
+
+     Can also be used to run only a selected portion (in visual mode) of a role.
+     It will create a `tmptask` folder in the roles directly for that.
+
+
+vim:tw=78:ts=8:noet:ft=help:norl:

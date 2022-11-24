@@ -47,13 +47,14 @@ function M.run()
   local bufnr = api.nvim_get_current_buf()
   local fname = api.nvim_buf_get_name(bufnr)
   local path = vim.fn.fnamemodify(fname, ':p')
-  local role_match = path:match('/roles/([%w-]+)/')
+  local role_pattern = '/roles/([%w-]+)/'
+  local role_match = path:match(role_pattern)
   if role_match then
     local mode = api.nvim_get_mode().mode
     local become
     if mode == 'v' or mode == 'V' then
       local lines = get_selected_lines()
-      local tmptask = string.gsub(path, role_match, 'tmptask')
+      local tmptask = path:gsub(role_pattern, '/roles/tmptask/')
       become = has_become(lines)
       tmptask = vim.fn.fnamemodify(tmptask, ':h') .. '/main.yml'
       vim.fn.mkdir(vim.fn.fnamemodify(tmptask, ':h'), 'p')

@@ -20,7 +20,8 @@ local function launch_term(cmd)
 end
 
 
-local function get_selected_lines()
+---@param mode "v"|"V"
+local function get_selected_lines(mode)
   -- [bufnr, lnum, col, off]; 1-indexed
   local start = vim.fn.getpos('v')
   local end_ = vim.fn.getpos('.')
@@ -28,6 +29,11 @@ local function get_selected_lines()
   local start_col = start[3]
   local end_row = end_[2]
   local end_col = end_[3]
+  if mode == "V" then
+    start_col = 1
+    local lines = api.nvim_buf_get_lines(0, end_row - 1, end_row, true)
+    end_col = #(lines[1])
+  end
   if start_row == end_row and end_col < start_col then
     end_col, start_col = start_col, end_col
   elseif end_row < start_row then
@@ -53,7 +59,7 @@ function M.run()
     local mode = api.nvim_get_mode().mode
     local become
     if mode == 'v' or mode == 'V' then
-      local lines = get_selected_lines()
+      local lines = get_selected_lines(mode)
       local tmptask = path:gsub(role_pattern, '/roles/tmptask/')
       become = has_become(lines)
       tmptask = vim.fn.fnamemodify(tmptask, ':h') .. '/main.yml'

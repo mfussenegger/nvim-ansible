@@ -4,5 +4,10 @@ if vim.fn.executable('ansible-doc') then
 end
 local fname = api.nvim_buf_get_name(0)
 if fname:find('tasks/') then
-  vim.bo.path = vim.bo.path .. ',' .. vim.fs.dirname(fname:gsub("tasks/", "files/"))
+  local paths = {
+    vim.bo.path,
+    vim.fs.dirname(fname:gsub("tasks/", "files/")),
+    vim.fs.dirname(fname)
+  }
+  vim.bo.path = table.concat(paths, ",")
 end

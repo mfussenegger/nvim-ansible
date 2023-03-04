@@ -11,3 +11,5 @@ if fname:find('tasks/') then
   }
   vim.bo.path = table.concat(paths, ",")
 end
+
+vim.bo.iskeyword = "@,48-57,_,192-255,."

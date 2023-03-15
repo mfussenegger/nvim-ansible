@@ -29,16 +29,16 @@ local function get_selected_lines(mode)
   local start_col = start[3]
   local end_row = end_[2]
   local end_col = end_[3]
-  if mode == "V" then
-    start_col = 1
-    local lines = api.nvim_buf_get_lines(0, end_row - 1, end_row, true)
-    end_col = #(lines[1])
-  end
   if start_row == end_row and end_col < start_col then
     end_col, start_col = start_col, end_col
   elseif end_row < start_row then
     start_row, end_row = end_row, start_row
     start_col, end_col = end_col, start_col
+  end
+  if mode == "V" then
+    start_col = 1
+    local lines = api.nvim_buf_get_lines(0, end_row - 1, end_row, true)
+    end_col = #(lines[1])
   end
   return api.nvim_buf_get_text(0, start_row - 1, start_col - 1, end_row - 1, end_col, {})
 end

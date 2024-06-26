@@ -1,17 +1,23 @@
 if vim.filetype then
   vim.filetype.add({
     pattern = {
-      [".*/playbooks/.*%.yml"] = "yaml.ansible",
-      [".*/playbooks/.*%.yaml"] = "yaml.ansible",
-      [".*/roles/.*/tasks/.*%.yml"] = "yaml.ansible",
-      [".*/roles/.*/tasks/.*%.yaml"] = "yaml.ansible",
-      [".*/roles/.*/handlers/.*%.yml"] = "yaml.ansible",
-      [".*/roles/.*/handlers/.*%.yaml"] = "yaml.ansible",
+      [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
+      [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
+      [".*/group_vars/.*/.*%.ya?ml"] = "yaml.ansible",
+      [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
+      [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
+      [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
     }
   })
 else
   vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     pattern = {
+      "*/host_vars/*.yml",
+      "*/host_vars/*.yaml",
+      "*/group_vars/*.yml",
+      "*/group_vars/*.yaml",
+      "*/group_vars/*/*.yml",
+      "*/group_vars/*/*.yaml",
       "*/playbooks/*.yml",
       "*/playbooks/*.yaml",
       "*/roles/*/tasks/*.yml",

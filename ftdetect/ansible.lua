@@ -4,13 +4,15 @@ if vim.filetype then
       [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
       [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
       [".*/group_vars/.*/.*%.ya?ml"] = "yaml.ansible",
+      [".*/playbook.*%.ya?ml"] = "yaml.ansible",
       [".*/playbooks/.*%.ya?ml"] = "yaml.ansible",
       [".*/roles/.*/tasks/.*%.ya?ml"] = "yaml.ansible",
       [".*/roles/.*/handlers/.*%.ya?ml"] = "yaml.ansible",
-    }
+      [".*/tasks/.*%.ya?ml"] = "yaml.ansible",
+    },
   })
 else
-  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = {
       "*/host_vars/*.yml",
       "*/host_vars/*.yaml",
@@ -18,12 +20,16 @@ else
       "*/group_vars/*.yaml",
       "*/group_vars/*/*.yml",
       "*/group_vars/*/*.yaml",
+      "*/playbook*.yml",
+      "*/playbook*.yaml",
       "*/playbooks/*.yml",
       "*/playbooks/*.yaml",
       "*/roles/*/tasks/*.yml",
       "*/roles/*/tasks/*.yaml",
       "*/roles/*/handlers/*.yml",
-      "*/roles/*/handlers/*.yaml"
+      "*/roles/*/handlers/*.yaml",
+      "*/tasks/*.yml",
+      "*/tasks/*.yaml",
     },
     callback = function()
       vim.bo.filetype = "yaml.ansible"

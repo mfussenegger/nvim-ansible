@@ -7,6 +7,7 @@ if fname:find('tasks/') then
   local paths = {
     vim.bo.path,
     vim.fs.dirname(fname:gsub("tasks/", "files/")),
+    vim.fs.dirname(fname:gsub("tasks/", "templates/")),
     vim.fs.dirname(fname)
   }
   vim.bo.path = table.concat(paths, ",")

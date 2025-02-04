@@ -1,6 +1,7 @@
 if vim.filetype then
   vim.filetype.add({
     pattern = {
+      [".*/defaults/.*%.ya?ml"] = "yaml.ansible",
       [".*/host_vars/.*%.ya?ml"] = "yaml.ansible",
       [".*/group_vars/.*%.ya?ml"] = "yaml.ansible",
       [".*/group_vars/.*/.*%.ya?ml"] = "yaml.ansible",

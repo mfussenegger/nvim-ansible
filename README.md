@@ -4,7 +4,7 @@
 
 ```bash
 git clone \
-    https://github.com/mfussenegger/nvim-ansible.git \
+    https://codeberg.org/mfussenegger/nvim-ansible.git \
     ~/.config/nvim/pack/plugins/start/nvim-ansible
 ```
 
